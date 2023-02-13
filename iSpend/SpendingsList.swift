@@ -30,6 +30,10 @@ struct SpendingsList: View {
                     .onDelete(perform: delete)
                 }
                 .onAppear(perform: getSpendings)
+                .refreshable {
+                    print("refresh")
+                    getSpendings()
+                }
                 
                 HStack {
                     Spacer()
@@ -77,6 +81,19 @@ struct SpendingsList: View {
     
     func getSpendings() {
         do {
+            if let data = UserDefaults(suiteName: "group.iSpend")?.data(forKey: "zettl") {
+                print("data")
+                if let spendings = try? parseZettlInput(data) {
+                    print("input finished: \(spendings)")
+                    try? Spending.save(spendings)
+                    UserDefaults(suiteName: "group.iSpend")?.set(nil, forKey: "zettl")
+                    self.spendings.append(contentsOf: spendings)
+                    print("save finished")
+                    
+                }
+            }
+            print("get all")
+            
             spendings = try Spending.getAll()
         } catch let error {
             print("error")

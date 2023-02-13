@@ -18,6 +18,7 @@ struct iSpendApp: App {
     
     init() {
         do {
+            
             print(getSpendingsFile())
             if (try !spendingsFileExists()) {
                 var configuration = CSVWriter.Configuration()

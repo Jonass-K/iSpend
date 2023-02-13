@@ -23,17 +23,60 @@ func parseZettlInput(_ url: URL) throws -> [Spending] {
     
     print("before decode")
     do {
-        url.startAccessingSecurityScopedResource()
+        let _ = url.startAccessingSecurityScopedResource()
         let csv = try CSVReader.decode(input: url, configuration: readerConfiguration)
     
     print("after decode")
     
     return csv.rows.flatMap { row in
         print(row)
+        let description = row[4]
+        
+        if (description == "REWE") {
+            return [] as [Spending]
+        }
         
         let csvDate = row[1].split(separator: ".")
         let date = Date.by(day: Int(csvDate[0])!, month: Int(csvDate[1])!, year: Int(csvDate[2])!)
+        let category = Category.food
+        let priority = Priority.essential
+        let price = Float(row[6].dropFirst(2))!
+        let quantity = Int(row[7])!
+        
+        var spending: [Spending] = []
+        
+        for _ in 0..<quantity {
+            spending.append(Spending(date: date, description: description, category: category, priority: priority, price: price))
+        }
+        return spending
+    }
+    } catch let error {
+        print(error)
+    }
+    return []
+}
+
+func parseZettlInput(_ data: Data) throws -> [Spending] {
+    print("parse")
+    var readerConfiguration = CSVReader.Configuration()
+    readerConfiguration.headerStrategy = .firstLine
+    
+    print("before decode")
+    do {
+        let csv = try CSVReader.decode(input: data, configuration: readerConfiguration)
+    
+    print("after decode")
+    
+    return csv.rows.flatMap { row in
+        print(row)
         let description = row[4]
+        
+        if (description == "REWE") {
+            return [] as [Spending]
+        }
+        
+        let csvDate = row[1].split(separator: ".")
+        let date = Date.by(day: Int(csvDate[0])!, month: Int(csvDate[1])!, year: Int(csvDate[2])!)
         let category = Category.food
         let priority = Priority.essential
         let price = Float(row[6].dropFirst(2))!
