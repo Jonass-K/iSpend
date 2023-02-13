@@ -11,6 +11,14 @@
 		DD5878AC299934EB00F2174D /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD5878AB299934EB00F2174D /* ContentView.swift */; };
 		DD5878AE299934EC00F2174D /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = DD5878AD299934EC00F2174D /* Assets.xcassets */; };
 		DD5878B2299934EC00F2174D /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = DD5878B1299934EC00F2174D /* Preview Assets.xcassets */; };
+		DD5878BA29993B4800F2174D /* CodableCSV in Frameworks */ = {isa = PBXBuildFile; productRef = DD5878B929993B4800F2174D /* CodableCSV */; };
+		DD5878BC2999456200F2174D /* Currency.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD5878BB2999456200F2174D /* Currency.swift */; };
+		DD5878BE2999457B00F2174D /* Category.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD5878BD2999457B00F2174D /* Category.swift */; };
+		DD5878C02999458C00F2174D /* Priority.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD5878BF2999458C00F2174D /* Priority.swift */; };
+		DD5878C2299945B500F2174D /* FileManagment.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD5878C1299945B500F2174D /* FileManagment.swift */; };
+		DD5878C4299945C500F2174D /* Spending.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD5878C3299945C500F2174D /* Spending.swift */; };
+		DD5878C629997E1900F2174D /* SpendingsList.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD5878C529997E1900F2174D /* SpendingsList.swift */; };
+		DD5878C82999912D00F2174D /* Document.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD5878C72999912D00F2174D /* Document.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -20,6 +28,13 @@
 		DD5878AD299934EC00F2174D /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		DD5878AF299934EC00F2174D /* iSpend.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = iSpend.entitlements; sourceTree = "<group>"; };
 		DD5878B1299934EC00F2174D /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
+		DD5878BB2999456200F2174D /* Currency.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Currency.swift; sourceTree = "<group>"; };
+		DD5878BD2999457B00F2174D /* Category.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Category.swift; sourceTree = "<group>"; };
+		DD5878BF2999458C00F2174D /* Priority.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Priority.swift; sourceTree = "<group>"; };
+		DD5878C1299945B500F2174D /* FileManagment.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FileManagment.swift; sourceTree = "<group>"; };
+		DD5878C3299945C500F2174D /* Spending.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Spending.swift; sourceTree = "<group>"; };
+		DD5878C529997E1900F2174D /* SpendingsList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpendingsList.swift; sourceTree = "<group>"; };
+		DD5878C72999912D00F2174D /* Document.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Document.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -27,6 +42,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				DD5878BA29993B4800F2174D /* CodableCSV in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -57,6 +73,13 @@
 				DD5878AD299934EC00F2174D /* Assets.xcassets */,
 				DD5878AF299934EC00F2174D /* iSpend.entitlements */,
 				DD5878B0299934EC00F2174D /* Preview Content */,
+				DD5878BB2999456200F2174D /* Currency.swift */,
+				DD5878BD2999457B00F2174D /* Category.swift */,
+				DD5878BF2999458C00F2174D /* Priority.swift */,
+				DD5878C1299945B500F2174D /* FileManagment.swift */,
+				DD5878C3299945C500F2174D /* Spending.swift */,
+				DD5878C529997E1900F2174D /* SpendingsList.swift */,
+				DD5878C72999912D00F2174D /* Document.swift */,
 			);
 			path = iSpend;
 			sourceTree = "<group>";
@@ -85,6 +108,9 @@
 			dependencies = (
 			);
 			name = iSpend;
+			packageProductDependencies = (
+				DD5878B929993B4800F2174D /* CodableCSV */,
+			);
 			productName = iSpend;
 			productReference = DD5878A6299934EB00F2174D /* iSpend.app */;
 			productType = "com.apple.product-type.application";
@@ -113,6 +139,9 @@
 				Base,
 			);
 			mainGroup = DD58789D299934EB00F2174D;
+			packageReferences = (
+				DD5878B829993B4700F2174D /* XCRemoteSwiftPackageReference "CodableCSV" */,
+			);
 			productRefGroup = DD5878A7299934EB00F2174D /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
@@ -139,8 +168,15 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				DD5878C2299945B500F2174D /* FileManagment.swift in Sources */,
+				DD5878BC2999456200F2174D /* Currency.swift in Sources */,
 				DD5878AC299934EB00F2174D /* ContentView.swift in Sources */,
 				DD5878AA299934EB00F2174D /* iSpendApp.swift in Sources */,
+				DD5878C4299945C500F2174D /* Spending.swift in Sources */,
+				DD5878C82999912D00F2174D /* Document.swift in Sources */,
+				DD5878C629997E1900F2174D /* SpendingsList.swift in Sources */,
+				DD5878C02999458C00F2174D /* Priority.swift in Sources */,
+				DD5878BE2999457B00F2174D /* Category.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -354,6 +390,25 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		DD5878B829993B4700F2174D /* XCRemoteSwiftPackageReference "CodableCSV" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/dehesa/CodableCSV.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 0.6.7;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		DD5878B929993B4800F2174D /* CodableCSV */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = DD5878B829993B4700F2174D /* XCRemoteSwiftPackageReference "CodableCSV" */;
+			productName = CodableCSV;
+		};
+/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = DD58789E299934EB00F2174D /* Project object */;
 }
