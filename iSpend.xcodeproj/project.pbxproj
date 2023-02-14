@@ -22,6 +22,7 @@
 		DD5878D0299A91E500F2174D /* ShareViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD5878CF299A91E500F2174D /* ShareViewController.swift */; };
 		DD5878D3299A91E500F2174D /* MainInterface.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = DD5878D1299A91E500F2174D /* MainInterface.storyboard */; };
 		DD5878D7299A91E500F2174D /* ShareTableExtension.appex in Embed Foundation Extensions */ = {isa = PBXBuildFile; fileRef = DD5878CD299A91E500F2174D /* ShareTableExtension.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
+		DD5878E2299BFFB700F2174D /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = DD5878E1299BFFB700F2174D /* Assets.xcassets */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -67,6 +68,7 @@
 		DD5878D2299A91E500F2174D /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/MainInterface.storyboard; sourceTree = "<group>"; };
 		DD5878D4299A91E500F2174D /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		DD5878DC299A94E100F2174D /* ShareTableExtension.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = ShareTableExtension.entitlements; sourceTree = "<group>"; };
+		DD5878E1299BFFB700F2174D /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -140,6 +142,7 @@
 				DD5878CF299A91E500F2174D /* ShareViewController.swift */,
 				DD5878D1299A91E500F2174D /* MainInterface.storyboard */,
 				DD5878D4299A91E500F2174D /* Info.plist */,
+				DD5878E1299BFFB700F2174D /* Assets.xcassets */,
 			);
 			path = ShareTableExtension;
 			sourceTree = "<group>";
@@ -240,6 +243,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				DD5878E2299BFFB700F2174D /* Assets.xcassets in Resources */,
 				DD5878D3299A91E500F2174D /* MainInterface.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -297,6 +301,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ANALYZER_NONNULL = YES;
 				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
@@ -355,6 +360,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ANALYZER_NONNULL = YES;
 				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
