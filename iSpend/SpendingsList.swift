@@ -12,13 +12,15 @@ struct SpendingsList: View {
     @State private var spendings: [Spending] = []
     @State private var importing: Bool = false
     
+    private var parser = Parser(strategy: ZettlStrategy())
+    
     var body: some View {
         NavigationStack {
             VStack {
                 List {
                     ForEach(Array(spendings.enumerated()), id: \.element) { row, spending in
                         NavigationLink {
-                            ContentView(spending: spending, row: row)
+                            AddEditSpendingView(spending: spending, row: row)
                         } label: {
                             HStack {
                                 Text(spending.description)
@@ -30,75 +32,59 @@ struct SpendingsList: View {
                     .onDelete(perform: delete)
                 }
                 .onAppear(perform: getSpendings)
-                .refreshable {
-                    print("refresh")
-                    getSpendings()
-                }
+                .refreshable { getSpendings() }
                 
                 HStack {
                     Spacer()
-                    Button {
+                    Button("Import Spendings") {
                         importing = true
-                    } label: {
-                        Text("Import Spendings")
                     }
                     Spacer()
                     
-                    NavigationLink {
-                        ContentView()
-                    } label: {
-                        Text("Add Spending")
+                    NavigationLink("Add Spending") {
+                        AddEditSpendingView()
                     }
                     Spacer()
                 }
             }
             .toolbar {
-                ShareLink(item: getSpendingsFile())
+                ShareLink(item: FileManager.default.spendingsFile)
             }
             .navigationTitle("Spendings")
-            .fileImporter(isPresented: $importing, allowedContentTypes: [.commaSeparatedText], allowsMultipleSelection: false) { result in
-                print("import")
-                guard let url = try? result.get().first else { return }
-                print("url: \(url)")
-                if let spendings = try? parseZettlInput(url) {
-                    print("input finished: \(spendings)")
-                    try? Spending.save(spendings)
-                    self.spendings.append(contentsOf: spendings)
-                    print("save finished")
-                }
-            }
+            .fileImporter(isPresented: $importing,
+                          allowedContentTypes: [.commaSeparatedText],
+                          allowsMultipleSelection: false,
+                          onCompletion: importCSV)
         }
+    }
+    
+    func importCSV(_ result: Result<[URL], Error>) {
+        guard let url = try? result.get().first else { return }
+        guard let spendings = try? parser.parse(url) else { return }
+
+        try? Spending.save(spendings)
+        self.spendings.append(contentsOf: spendings)
     }
     
     func delete(at offsets: IndexSet) {
-        spendings.remove(atOffsets: offsets)
-        do {
-            try Spending.overwrite(spendings)
-        } catch let error {
-            print(error)
-        }
+        var spendingsTemp = spendings
+        spendingsTemp.remove(atOffsets: offsets)
+        
+        try? Spending.overwrite(spendingsTemp)
+        spendings = spendingsTemp
     }
     
     func getSpendings() {
-        do {
-            if let data = UserDefaults(suiteName: "group.iSpend")?.data(forKey: "zettl") {
-                print("data")
-                if let spendings = try? parseZettlInput(data) {
-                    print("input finished: \(spendings)")
-                    try? Spending.save(spendings)
-                    UserDefaults(suiteName: "group.iSpend")?.set(nil, forKey: "zettl")
-                    self.spendings.append(contentsOf: spendings)
-                    print("save finished")
-                    
-                }
+        if let data = UserDefaults(suiteName: "group.iSpend")?.data(forKey: "zettl") {
+            if let spendings = try? parser.parse(data) {
+                try? Spending.save(spendings)
+                UserDefaults(suiteName: "group.iSpend")?.set(nil, forKey: "zettl")
+                self.spendings.append(contentsOf: spendings)
             }
-            print("get all")
-            
-            spendings = try Spending.getAll()
-        } catch let error {
-            print("error")
-            print(error)
         }
+            
+        do { spendings = try Spending.getAll() }
+        catch {}
     }
 }
 

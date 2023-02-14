@@ -7,102 +7,27 @@
 
 import Foundation
 import CodableCSV
-
-func getDocumentsDirectory() -> URL {
-    FileManager.default.urls(for: .documentDirectory, in: .userDomainMask)[0]
-}
-
-func getSpendingsFile() -> URL {
-    getDocumentsDirectory().appendingPathComponent("spendings.csv")
-}
-
-func parseZettlInput(_ url: URL) throws -> [Spending] {
-    print("parse")
-    var readerConfiguration = CSVReader.Configuration()
-    readerConfiguration.headerStrategy = .firstLine
     
-    print("before decode")
-    do {
-        let _ = url.startAccessingSecurityScopedResource()
-        let csv = try CSVReader.decode(input: url, configuration: readerConfiguration)
+extension FileManager {
     
-    print("after decode")
-    
-    return csv.rows.flatMap { row in
-        print(row)
-        let description = row[4]
-        
-        if (description == "REWE") {
-            return [] as [Spending]
-        }
-        
-        let csvDate = row[1].split(separator: ".")
-        let date = Date.by(day: Int(csvDate[0])!, month: Int(csvDate[1])!, year: Int(csvDate[2])!)
-        let category = Category.food
-        let priority = Priority.essential
-        let price = Float(row[6].dropFirst(2))!
-        let quantity = Int(row[7])!
-        
-        var spending: [Spending] = []
-        
-        for _ in 0..<quantity {
-            spending.append(Spending(date: date, description: description, category: category, priority: priority, price: price))
-        }
-        return spending
+    var documentsDirectory: URL {
+        FileManager.default.urls(for: .documentDirectory, in: .userDomainMask)[0]
     }
-    } catch let error {
-        print(error)
-    }
-    return []
-}
-
-func parseZettlInput(_ data: Data) throws -> [Spending] {
-    print("parse")
-    var readerConfiguration = CSVReader.Configuration()
-    readerConfiguration.headerStrategy = .firstLine
     
-    print("before decode")
-    do {
-        let csv = try CSVReader.decode(input: data, configuration: readerConfiguration)
-    
-    print("after decode")
-    
-    return csv.rows.flatMap { row in
-        print(row)
-        let description = row[4]
-        
-        if (description == "REWE") {
-            return [] as [Spending]
-        }
-        
-        let csvDate = row[1].split(separator: ".")
-        let date = Date.by(day: Int(csvDate[0])!, month: Int(csvDate[1])!, year: Int(csvDate[2])!)
-        let category = Category.food
-        let priority = Priority.essential
-        let price = Float(row[6].dropFirst(2))!
-        let quantity = Int(row[7])!
-        
-        var spending: [Spending] = []
-        
-        for _ in 0..<quantity {
-            spending.append(Spending(date: date, description: description, category: category, priority: priority, price: price))
-        }
-        return spending
+    var spendingsFile: URL {
+        documentsDirectory.appendingPathComponent("spendings.csv")
     }
-    } catch let error {
-        print(error)
+    
+    var spendingsFileExists: Bool {
+        FileManager.default.fileExists(atPath: spendingsFile.path)
     }
-    return []
-}
-
-func spendingsFileExists() throws -> Bool {
-    do {
-        let _ = try CSVReader(input: getSpendingsFile())
-        return true
-    } catch let error {
-        if (error._code == 4) {
-            return false
-        }
-        throw error
+    
+    func createSpendingsFile() throws {
+        if (spendingsFileExists) { return }
+        
+        var configuration = CSVWriter.Configuration()
+        configuration.headers = ["Date", "Description", "Category", "Priority", "Price"]
+        
+        try CSVWriter(fileURL: spendingsFile, configuration: configuration).endEncoding()
     }
 }

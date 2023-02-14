@@ -1,5 +1,5 @@
 //
-//  ContentView.swift
+//  AddEditSpendingView.swift
 //  iSpend
 //
 //  Created by Jonas Kaiser on 12.02.23.
@@ -8,7 +8,7 @@
 import SwiftUI
 import CodableCSV
 
-struct ContentView: View {
+struct AddEditSpendingView: View {
     @Environment(\.presentationMode) var presentationMode: Binding<PresentationMode>
     
     @State var spending = Spending()
@@ -31,7 +31,7 @@ struct ContentView: View {
                     }
                     Text("").tag(nil as Priority?)
                 }
-                TextField("Price", value: $spending.price, formatter: CurrencyFormatter)
+                TextField("Price", value: $spending.price, formatter: currencyFormatter)
                 
                 DatePicker("Date", selection: $spending.date)
             }
@@ -49,22 +49,17 @@ struct ContentView: View {
     }
     
     func cancel() {
-        spending = Spending()
-        self.presentationMode.wrappedValue.dismiss()
+        navigateBack(presentationMode)
     }
     
     func save() {
-        do {
-            try spending.save(row: row)
-            self.presentationMode.wrappedValue.dismiss()
-        } catch let error {
-            print(error)
-        }
+        try? spending.save(row: row)
+        navigateBack(presentationMode)
     }
 }
 
 struct ContentView_Previews: PreviewProvider {
     static var previews: some View {
-        ContentView()
+        AddEditSpendingView()
     }
 }
