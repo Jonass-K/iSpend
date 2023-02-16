@@ -17,7 +17,7 @@
 		DD5878C02999458C00F2174D /* Priority.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD5878BF2999458C00F2174D /* Priority.swift */; };
 		DD5878C2299945B500F2174D /* FileManagment.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD5878C1299945B500F2174D /* FileManagment.swift */; };
 		DD5878C4299945C500F2174D /* Spending.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD5878C3299945C500F2174D /* Spending.swift */; };
-		DD5878C629997E1900F2174D /* SpendingsList.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD5878C529997E1900F2174D /* SpendingsList.swift */; };
+		DD5878C629997E1900F2174D /* SpendingsListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD5878C529997E1900F2174D /* SpendingsListView.swift */; };
 		DD5878D0299A91E500F2174D /* ShareViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD5878CF299A91E500F2174D /* ShareViewController.swift */; };
 		DD5878D3299A91E500F2174D /* MainInterface.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = DD5878D1299A91E500F2174D /* MainInterface.storyboard */; };
 		DD5878D7299A91E500F2174D /* ShareTableExtension.appex in Embed Foundation Extensions */ = {isa = PBXBuildFile; fileRef = DD5878CD299A91E500F2174D /* ShareTableExtension.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
@@ -25,7 +25,12 @@
 		DD5878E4299C19C600F2174D /* View.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD5878E3299C19C600F2174D /* View.swift */; };
 		DD5878E6299C1BDD00F2174D /* Parser.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD5878E5299C1BDD00F2174D /* Parser.swift */; };
 		DD5878E8299C200D00F2174D /* Date.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD5878E7299C200D00F2174D /* Date.swift */; };
-		DD5878EE299C270300F2174D /* ParseStrategy.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD5878ED299C270300F2174D /* ParseStrategy.swift */; };
+		DD5878EE299C270300F2174D /* ZettlStrategy.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD5878ED299C270300F2174D /* ZettlStrategy.swift */; };
+		DD5878F2299D378800F2174D /* CategoryBarChart.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD5878F1299D378800F2174D /* CategoryBarChart.swift */; };
+		DD5878F4299D3A2F00F2174D /* SpendingsInCategory.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD5878F3299D3A2F00F2174D /* SpendingsInCategory.swift */; };
+		DD5878F6299D717700F2174D /* PriorityBarChart.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD5878F5299D717700F2174D /* PriorityBarChart.swift */; };
+		DD5878F8299D7D4A00F2174D /* StatisticsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD5878F7299D7D4A00F2174D /* StatisticsView.swift */; };
+		DD5878FA299D86C300F2174D /* DefaultStrategy.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD5878F9299D86C300F2174D /* DefaultStrategy.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -64,7 +69,7 @@
 		DD5878BF2999458C00F2174D /* Priority.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Priority.swift; sourceTree = "<group>"; };
 		DD5878C1299945B500F2174D /* FileManagment.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FileManagment.swift; sourceTree = "<group>"; };
 		DD5878C3299945C500F2174D /* Spending.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Spending.swift; sourceTree = "<group>"; };
-		DD5878C529997E1900F2174D /* SpendingsList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpendingsList.swift; sourceTree = "<group>"; };
+		DD5878C529997E1900F2174D /* SpendingsListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpendingsListView.swift; sourceTree = "<group>"; };
 		DD5878CD299A91E500F2174D /* ShareTableExtension.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = ShareTableExtension.appex; sourceTree = BUILT_PRODUCTS_DIR; };
 		DD5878CF299A91E500F2174D /* ShareViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShareViewController.swift; sourceTree = "<group>"; };
 		DD5878D2299A91E500F2174D /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/MainInterface.storyboard; sourceTree = "<group>"; };
@@ -74,7 +79,12 @@
 		DD5878E3299C19C600F2174D /* View.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = View.swift; sourceTree = "<group>"; };
 		DD5878E5299C1BDD00F2174D /* Parser.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Parser.swift; sourceTree = "<group>"; };
 		DD5878E7299C200D00F2174D /* Date.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Date.swift; sourceTree = "<group>"; };
-		DD5878ED299C270300F2174D /* ParseStrategy.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ParseStrategy.swift; sourceTree = "<group>"; };
+		DD5878ED299C270300F2174D /* ZettlStrategy.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ZettlStrategy.swift; sourceTree = "<group>"; };
+		DD5878F1299D378800F2174D /* CategoryBarChart.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoryBarChart.swift; sourceTree = "<group>"; };
+		DD5878F3299D3A2F00F2174D /* SpendingsInCategory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpendingsInCategory.swift; sourceTree = "<group>"; };
+		DD5878F5299D717700F2174D /* PriorityBarChart.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PriorityBarChart.swift; sourceTree = "<group>"; };
+		DD5878F7299D7D4A00F2174D /* StatisticsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StatisticsView.swift; sourceTree = "<group>"; };
+		DD5878F9299D86C300F2174D /* DefaultStrategy.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DefaultStrategy.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -96,6 +106,16 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		DD1A81D9299E2E8D00DB525D /* Statistics */ = {
+			isa = PBXGroup;
+			children = (
+				DD5878F7299D7D4A00F2174D /* StatisticsView.swift */,
+				DD5878F5299D717700F2174D /* PriorityBarChart.swift */,
+				DD5878F1299D378800F2174D /* CategoryBarChart.swift */,
+			);
+			path = Statistics;
+			sourceTree = "<group>";
+		};
 		DD58789D299934EB00F2174D = {
 			isa = PBXGroup;
 			children = (
@@ -122,10 +142,11 @@
 				DD5878B0299934EC00F2174D /* Preview Content */,
 				DD5878E9299C202A00F2174D /* Types */,
 				DD5878EC299C26E600F2174D /* Parser */,
+				DD1A81D9299E2E8D00DB525D /* Statistics */,
 				DD5878A9299934EB00F2174D /* iSpendApp.swift */,
 				DD5878C1299945B500F2174D /* FileManagment.swift */,
 				DD5878AB299934EB00F2174D /* AddEditSpendingView.swift */,
-				DD5878C529997E1900F2174D /* SpendingsList.swift */,
+				DD5878C529997E1900F2174D /* SpendingsListView.swift */,
 			);
 			path = iSpend;
 			sourceTree = "<group>";
@@ -159,6 +180,7 @@
 				DD5878BF2999458C00F2174D /* Priority.swift */,
 				DD5878BD2999457B00F2174D /* Category.swift */,
 				DD5878BB2999456200F2174D /* Currency.swift */,
+				DD5878F3299D3A2F00F2174D /* SpendingsInCategory.swift */,
 			);
 			path = Types;
 			sourceTree = "<group>";
@@ -167,7 +189,8 @@
 			isa = PBXGroup;
 			children = (
 				DD5878E5299C1BDD00F2174D /* Parser.swift */,
-				DD5878ED299C270300F2174D /* ParseStrategy.swift */,
+				DD5878ED299C270300F2174D /* ZettlStrategy.swift */,
+				DD5878F9299D86C300F2174D /* DefaultStrategy.swift */,
 			);
 			path = Parser;
 			sourceTree = "<group>";
@@ -284,14 +307,19 @@
 				DD5878E6299C1BDD00F2174D /* Parser.swift in Sources */,
 				DD5878BC2999456200F2174D /* Currency.swift in Sources */,
 				DD5878AC299934EB00F2174D /* AddEditSpendingView.swift in Sources */,
+				DD5878F6299D717700F2174D /* PriorityBarChart.swift in Sources */,
+				DD5878F8299D7D4A00F2174D /* StatisticsView.swift in Sources */,
+				DD5878FA299D86C300F2174D /* DefaultStrategy.swift in Sources */,
 				DD5878AA299934EB00F2174D /* iSpendApp.swift in Sources */,
 				DD5878C4299945C500F2174D /* Spending.swift in Sources */,
 				DD5878E8299C200D00F2174D /* Date.swift in Sources */,
-				DD5878C629997E1900F2174D /* SpendingsList.swift in Sources */,
+				DD5878C629997E1900F2174D /* SpendingsListView.swift in Sources */,
 				DD5878E4299C19C600F2174D /* View.swift in Sources */,
 				DD5878C02999458C00F2174D /* Priority.swift in Sources */,
 				DD5878BE2999457B00F2174D /* Category.swift in Sources */,
-				DD5878EE299C270300F2174D /* ParseStrategy.swift in Sources */,
+				DD5878F2299D378800F2174D /* CategoryBarChart.swift in Sources */,
+				DD5878F4299D3A2F00F2174D /* SpendingsInCategory.swift in Sources */,
+				DD5878EE299C270300F2174D /* ZettlStrategy.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

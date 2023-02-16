@@ -12,7 +12,7 @@ import CodableCSV
 struct iSpendApp: App {
     var body: some Scene {
         WindowGroup {
-            SpendingsList()
+            SpendingsListView()
         }
     }
     

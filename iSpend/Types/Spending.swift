@@ -8,15 +8,27 @@
 import Foundation
 import CodableCSV
 
+infix operator ?!: NilCoalescingPrecedence
+
+/// Throws the right hand side error if the left hand side optional is `nil`.
+func ?!<T>(value: T?, error: @autoclosure () -> Error) throws -> T {
+    guard let value = value else {
+        throw error()
+    }
+    return value
+}
+
+struct UnwrappedNilError: Error {}
+
 struct Spending: Codable, Identifiable, Hashable {
     var id = UUID()
     var date: Date = Date()
     var description: String = ""
-    var category: Category? = nil
-    var priority: Priority? = nil
+    var category: Category = .uncategorised
+    var priority: Priority = .unprioritised
     var price: Currency = 0
     
-    init(date: Date = Date(), description: String = "", category: Category? = nil, priority: Priority? = nil, price: Currency = 0) {
+    init(date: Date = Date(), description: String = "", category: Category = .uncategorised, priority: Priority = .unprioritised, price: Currency = 0) {
         self.date = date
         self.description = description
         self.category = category
@@ -24,13 +36,21 @@ struct Spending: Codable, Identifiable, Hashable {
         self.price = price
     }
     
-    init(from csv: [String]) {
+    init(from csv: [String]) throws {
         let csvDate = csv[0].split(separator: ".")
-        date = Date.by(day: Int(csvDate[0])!, month: Int(csvDate[1])!, year: Int(csvDate[2])!)
+        print(csvDate[0])
+        print(csvDate[1])
+        print(csvDate[2])
+        date = try Date.by(day: Int(csvDate[0]) ?! UnwrappedNilError(),
+                       month: Int(csvDate[1]) ?! UnwrappedNilError(),
+                       year: Int(csvDate[2]) ?! UnwrappedNilError())
         description = csv[1]
-        category = Category(rawValue: csv[2])
-        priority = Priority(rawValue: csv[3])
-        price = Float(csv[4])!
+        print(csv[2])
+        category = try Category(rawValue: csv[2]) ?! UnwrappedNilError()
+        print(csv[3])
+        priority = try Priority(rawValue: csv[3]) ?! UnwrappedNilError()
+        print(csv[4])
+        price = try Float(csv[4]) ?! UnwrappedNilError()
     }
     
     func save(row: Int? = nil) throws {
@@ -56,9 +76,9 @@ struct Spending: Codable, Identifiable, Hashable {
     private func csvEncoded() -> [String] {
         [
             "\(date.get(.day))" + "." + "\(date.get(.month))" + "." + "\(date.get(.year))",
-            "\(description)",
-            "\(category?.rawValue ?? "")",
-            "\(priority?.rawValue ?? "")",
+            description,
+            category.rawValue,
+            priority.rawValue,
             "\(price)"
         ]
     }
@@ -85,6 +105,6 @@ struct Spending: Codable, Identifiable, Hashable {
         let csv = try CSVReader.decode(input: FileManager.default.spendingsFile,
                                        configuration: readerConfiguration)
     
-        return csv.rows.map { Spending(from: $0) }
+        return try csv.rows.map { try Spending(from: $0) }
     }
 }

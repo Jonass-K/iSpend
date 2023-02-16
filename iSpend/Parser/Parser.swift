@@ -15,14 +15,16 @@ class Parser {
         self.strategy = strategy
     }
     
-    func parse(_ url: URL) throws -> [Spending] {
-        var readerConfiguration = CSVReader.Configuration()
-        readerConfiguration.headerStrategy = .firstLine
-        
+    func parse(_ url: URL, headerStrategy: Strategy.Header = .none) throws -> [Spending] {
         let _ = url.startAccessingSecurityScopedResource()
-        let input = try CSVReader.decode(input: url, configuration: readerConfiguration)
         
-        return try strategy.parse(input)
+        do {
+            let input = try CSVReader.decode(input: url, configuration: strategy.configuration)
+            
+            return try strategy.parse(input)
+        }
+        catch let error { print(error) }
+        return []
     }
     
     func parse(_ data: Data) throws -> [Spending] {
@@ -35,3 +37,8 @@ class Parser {
     }
 }
 
+protocol ParseStrategy {
+    var configuration: CSVReader.Configuration { get }
+    
+    func parse(_ input: CSVReader.FileView) throws -> [Spending]
+}

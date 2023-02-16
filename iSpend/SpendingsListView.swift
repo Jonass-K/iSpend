@@ -1,5 +1,5 @@
 //
-//  SpendingsList.swift
+//  SpendingsListView.swift
 //  iSpend
 //
 //  Created by Jonas Kaiser on 12.02.23.
@@ -8,7 +8,7 @@
 import SwiftUI
 import CodableCSV
 
-struct SpendingsList: View {
+struct SpendingsListView: View {
     @State private var spendings: [Spending] = []
     @State private var importing: Bool = false
     
@@ -48,6 +48,13 @@ struct SpendingsList: View {
                 }
             }
             .toolbar {
+                NavigationLink {
+                    StatisticsView(spendings)
+                } label: {
+                    Image(systemName: "chart.xyaxis.line")
+                        .foregroundStyle(.primary)
+                }
+
                 ShareLink(item: FileManager.default.spendingsFile)
             }
             .navigationTitle("Spendings")
@@ -58,15 +65,21 @@ struct SpendingsList: View {
         }
     }
     
-    func importCSV(_ result: Result<[URL], Error>) {
+    private func importCSV(_ result: Result<[URL], Error>) {
         guard let url = try? result.get().first else { return }
+        if url.lastPathComponent.hasPrefix("Zettl") {
+            parser.strategy = ZettlStrategy()
+        } else {
+            parser.strategy = DefaultStrategy()
+        }
+        
         guard let spendings = try? parser.parse(url) else { return }
 
         try? Spending.save(spendings)
         self.spendings.append(contentsOf: spendings)
     }
     
-    func delete(at offsets: IndexSet) {
+    private func delete(at offsets: IndexSet) {
         var spendingsTemp = spendings
         spendingsTemp.remove(atOffsets: offsets)
         
@@ -74,22 +87,28 @@ struct SpendingsList: View {
         spendings = spendingsTemp
     }
     
-    func getSpendings() {
+    private func getSpendings() {
+        getSharedSpendings()
+            
+        do { spendings = try Spending.getAll() }
+        catch {}
+    }
+    
+    private func getSharedSpendings() {
         if let data = UserDefaults(suiteName: "group.iSpend")?.data(forKey: "zettl") {
+            parser.strategy = ZettlStrategy()
+            
             if let spendings = try? parser.parse(data) {
                 try? Spending.save(spendings)
                 UserDefaults(suiteName: "group.iSpend")?.set(nil, forKey: "zettl")
                 self.spendings.append(contentsOf: spendings)
             }
         }
-            
-        do { spendings = try Spending.getAll() }
-        catch {}
     }
 }
 
-struct SpendingsList_Previews: PreviewProvider {
+struct SpendingsListView_Previews: PreviewProvider {
     static var previews: some View {
-        SpendingsList()
+        SpendingsListView()
     }
 }

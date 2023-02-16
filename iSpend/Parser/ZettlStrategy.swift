@@ -8,11 +8,13 @@
 import Foundation
 import CodableCSV
 
-protocol ParseStrategy {
-    func parse(_ input: CSVReader.FileView) throws -> [Spending]
-}
-
 struct ZettlStrategy: ParseStrategy {
+    var configuration: CSVReader.Configuration {
+        var configuration = CSVReader.Configuration()
+        configuration.headerStrategy = .firstLine
+        return configuration
+    }
+    
     func parse(_ input: CSVReader.FileView) throws -> [Spending] {
         input.rows.flatMap { row in
             let description = row[4]

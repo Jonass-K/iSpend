@@ -6,12 +6,14 @@
 //
 
 import Foundation
+import Charts
 
-enum Priority: String, CaseIterable, Identifiable, Codable {
+enum Priority: String, CaseIterable, Identifiable, Codable, Plottable {
     var id: Self { self }
     
     case essential = "Essential"
-    case haveToHave = "Have to have"
-    case niceToHave = "Nice to have"
+    case haveToHave = "Have to Have"
+    case niceToHave = "Nice to Have"
     case shouldntHave = "Shouldn't Have"
+    case unprioritised = "Unprioritised"
 }

@@ -6,14 +6,15 @@
 //
 
 import Foundation
+import Charts
 
-enum Category: String, CaseIterable, Identifiable, Codable {
+enum Category: String, CaseIterable, Identifiable, Codable, Plottable {
     var id: Self { self }
     
     case housing = "Housing"
     case food = "Food and other things for living"
     case mensa = "Mensa"
-    case eatingOut = "Eating out"
+    case eatingOut = "Eating Out"
     case clothing = "Clothing"
     case transportation = "Transportation"
     case mobile = "Phone/Internet"
@@ -24,4 +25,5 @@ enum Category: String, CaseIterable, Identifiable, Codable {
     case shopping = "Shopping"
     case fees = "Fees"
     case maintenance = "Maintenance"
+    case uncategorised = "Uncategorised"
 }
