@@ -25,15 +25,12 @@ struct AddEditSpendingView: View {
     }    
     
     var body: some View {
-        VStack {
-            List {
-                TextField("Description", text: $spending.description)
-                SpendingCategoryPicker($spending.category)
-                SpendingPriorityPicker($spending.priority)
-                TextField("Price", value: $spending.price, formatter: currencyFormatter)
-                
-                DatePicker("Date", selection: $spending.date, displayedComponents: .date)
-            }
+        List {
+            TextField("Description", text: $spending.description)
+            SpendingCategoryPicker($spending.category)
+            SpendingPriorityPicker($spending.priority)
+            CurrencyField($spending.price)
+            DatePicker("Date", selection: $spending.date, displayedComponents: .date)
         }
         .navigationTitle(row == nil ? "Add Spending" : "Edit spending")
         .toolbar {

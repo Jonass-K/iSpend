@@ -25,5 +25,5 @@ enum Category: String, CaseIterable, Identifiable, Codable, Plottable {
     case shopping = "Shopping"
     case fees = "Fees"
     case maintenance = "Maintenance"
-    case uncategorised = ""
+    case uncategorised = "Uncategorized"
 }
