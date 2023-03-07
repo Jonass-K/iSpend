@@ -18,4 +18,8 @@ extension View {
         formatter.currencyCode = "EUR"
         return formatter
     }
+    
+    func toolbar_iOS<Content: ToolbarContent, Style: ShapeStyle>(style: Style, for bar: ToolbarPlacement, content: () -> Content) -> some View {
+        self.toolbar(content: content).toolbarBackground(style, for: bar)
+    }
 }

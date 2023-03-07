@@ -1,0 +1,23 @@
+{
+  "pins" : [
+    {
+      "identity" : "codablecsv",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/dehesa/CodableCSV.git",
+      "state" : {
+        "revision" : "99ace2cfdfbc19108b529c021005fb57a460e715",
+        "version" : "0.6.7"
+      }
+    },
+    {
+      "identity" : "inject",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/Jonass-K/Inject.git",
+      "state" : {
+        "branch" : "main",
+        "revision" : "2d70e570ea9d6f298c32964955b96a2e3ff54646"
+      }
+    }
+  ],
+  "version" : 2
+}

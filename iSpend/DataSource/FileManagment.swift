@@ -7,10 +7,10 @@
 
 import Foundation
 import CodableCSV
+import Inject
     
 extension FileManager {
-    
-    var documentsDirectory: URL {
+    private var documentsDirectory: URL {
         FileManager.default.urls(for: .documentDirectory, in: .userDomainMask)[0]
     }
     
@@ -20,14 +20,5 @@ extension FileManager {
     
     var spendingsFileExists: Bool {
         FileManager.default.fileExists(atPath: spendingsFile.path)
-    }
-    
-    func createSpendingsFile() throws {
-        if (spendingsFileExists) { return }
-        
-        var configuration = CSVWriter.Configuration()
-        configuration.headers = ["Date", "Description", "Category", "Priority", "Price"]
-        
-        try CSVWriter(fileURL: spendingsFile, configuration: configuration).endEncoding()
     }
 }

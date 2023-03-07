@@ -20,11 +20,60 @@ enum StatisticsChart: String, CaseIterable, Identifiable {
     var id: Self { self }
 }
 
+func sortPerCategory(_ data: [Spending], spendingsPerCategory: [Spending]) -> [Spending] {
+    var sortedData: [Spending] = []
+    spendingsPerCategory.forEach { spending in
+        let filteredData = data.filter { $0.category == spending.category }
+        sortedData.append(contentsOf: filteredData)
+    }
+    return sortedData
+}
+
+func sortPerPriority(_ data: [Spending], spendingsPerPriority: [Spending]) -> [Spending] {
+    var sortedData: [Spending] = []
+    spendingsPerPriority.forEach { spending in
+        let filteredData = data.filter { $0.priority == spending.priority }
+        sortedData.append(contentsOf: filteredData)
+    }
+    return sortedData
+}
+
 struct StatisticsView: View {
-    var data: [Spending]
+    var spendingsPerCategory: [Spending]
+    var spendingsPerPriority: [Spending]
     
     init(_ data: [Spending]) {
-        self.data = data
+        let combinedData = Category.allCases.flatMap { category in
+            Priority.allCases.map { priority in
+                let price = data.filter { spending in
+                    spending.category == category && spending.priority == priority
+                }.reduce(0) { partialResult, spending in
+                    partialResult + spending.price
+                }
+                return Spending(category: category, priority: priority, price: price)
+            }
+        }.sorted { $0.category.rawValue <= $1.category.rawValue }
+        
+        let spendingsPerCategory = Category.allCases.map { category in
+            let price = combinedData.filter { spending in
+                spending.category == category
+            }.reduce(0) { partialResult, spending in
+                partialResult + spending.price
+            }
+            return Spending(category: category, price: price)
+        }.sorted { $0.price >= $1.price }
+
+        let spendingsPerPriority = Priority.allCases.map { priority in
+            let price = combinedData.filter { spending in
+                spending.priority == priority
+            }.reduce(0) { partialResult, spending in
+                partialResult + spending.price
+            }
+            return Spending(priority: priority, price: price)
+        }.sorted { $0.price >= $1.price }
+        
+        self.spendingsPerCategory = sortPerCategory(combinedData, spendingsPerCategory: spendingsPerCategory)
+        self.spendingsPerPriority = sortPerPriority(combinedData, spendingsPerPriority: spendingsPerPriority)
     }
     
     @State var group: StatisticsGroup = .category
@@ -41,14 +90,13 @@ struct StatisticsView: View {
             
             switch group {
             case .category:
-                CategoryBarChart(data)
-                    .padding()
+                CategoryBarChart(spendingsPerCategory)
             case .priority:
-                PriorityBarChart(data)
-                    .padding()
+                PriorityBarChart(spendingsPerPriority)
             }
+            Spacer()
         }
-        .padding()
+        .padding(.horizontal)
         .navigationTitle("Statistics")
     }
 }

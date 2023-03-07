@@ -7,6 +7,7 @@
 
 import SwiftUI
 import CodableCSV
+import Inject
 
 @main
 struct iSpendApp: App {
@@ -18,7 +19,11 @@ struct iSpendApp: App {
     
     init() {
         do {
-            try FileManager.default.createSpendingsFile()
+            @Dependency var Spendings = Spendings()
+            if FileManager.default.spendingsFileExists {
+                return
+            }
+            try Spendings.createFile()
         } catch {
             fatalError()
         }

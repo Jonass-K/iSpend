@@ -29,8 +29,9 @@ struct ZettlStrategy: ParseStrategy {
             let price = Float(row[6].dropFirst(2))!
             let quantity = Int(row[7])!
         
-            let spending = Spending(date: date, description: description, category: category, priority: priority, price: price)
-            return [Spending](repeating: spending, count: quantity)
+            return Array(0...quantity).map { _ in
+                Spending(date: date, description: description, category: category, priority: priority, price: price)
+            }
         }
     }
 }
