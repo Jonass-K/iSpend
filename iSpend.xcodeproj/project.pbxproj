@@ -42,6 +42,7 @@
 		DD5878F8299D7D4A00F2174D /* StatisticsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD5878F7299D7D4A00F2174D /* StatisticsView.swift */; };
 		DD5878FA299D86C300F2174D /* DefaultStrategy.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD5878F9299D86C300F2174D /* DefaultStrategy.swift */; };
 		DD89ACE529B7A5A50070D469 /* String.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD89ACE429B7A5A50070D469 /* String.swift */; };
+		DD89ACE729B923690070D469 /* OldStrategy.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD89ACE629B923690070D469 /* OldStrategy.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -106,6 +107,7 @@
 		DD5878F7299D7D4A00F2174D /* StatisticsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StatisticsView.swift; sourceTree = "<group>"; };
 		DD5878F9299D86C300F2174D /* DefaultStrategy.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DefaultStrategy.swift; sourceTree = "<group>"; };
 		DD89ACE429B7A5A50070D469 /* String.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = String.swift; sourceTree = "<group>"; };
+		DD89ACE629B923690070D469 /* OldStrategy.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OldStrategy.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -247,6 +249,7 @@
 				DD5878E5299C1BDD00F2174D /* Parser.swift */,
 				DD5878ED299C270300F2174D /* ZettlStrategy.swift */,
 				DD5878F9299D86C300F2174D /* DefaultStrategy.swift */,
+				DD89ACE629B923690070D469 /* OldStrategy.swift */,
 			);
 			path = Parser;
 			sourceTree = "<group>";
@@ -387,6 +390,7 @@
 				DD15A7AF29B66C5E0026807D /* MonthlySpendings.swift in Sources */,
 				DD1A81DD29A4EB4100DB525D /* CSVWriter.swift in Sources */,
 				DD1A81E829A527E400DB525D /* Popup.swift in Sources */,
+				DD89ACE729B923690070D469 /* OldStrategy.swift in Sources */,
 				DD17618D29B781960012FCCD /* CurrencyField.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

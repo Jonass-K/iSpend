@@ -15,7 +15,7 @@ class Parser {
         self.strategy = strategy
     }
     
-    func parse(_ url: URL, headerStrategy: Strategy.Header = .none) throws -> [Spending] {
+    func parse(_ url: URL) throws -> [Spending] {
         let _ = url.startAccessingSecurityScopedResource()
         
         let input = try CSVReader.decode(input: url, configuration: strategy.configuration)

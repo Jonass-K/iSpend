@@ -17,6 +17,8 @@ struct SpendingsListView: View {
     @State private var importing: Bool = false
     @State private var importError: Bool = false
     
+    @State private var deleteAlert: Bool = false
+    
 #if os(iOS)
     @State private var editMode = EditMode.inactive
 #endif
@@ -75,6 +77,20 @@ struct SpendingsListView: View {
                     }
                 }
                 .navigationTitle("Spendings")
+                .alert("Are you sure deleting all spendings?", isPresented: $deleteAlert) {
+                    HStack {
+                        Button("Cancel", role: .cancel) {}
+                        Button("Delete", role: .destructive) {
+                            do {
+                                try Spendings.delete()
+                                self.spendings = []
+                            }
+                            catch {
+                                print(error)
+                            }
+                        }
+                    }
+                }
                 .toolbar {
                     ToolbarItem(placement: .primaryAction) {
                         NavigationLink {
@@ -100,13 +116,7 @@ struct SpendingsListView: View {
                     
                     ToolbarItem(placement: .secondaryAction) {
                         Button {
-                            do {
-                                try Spendings.delete()
-                                self.spendings = []
-                            }
-                            catch {
-                                print(error)
-                            }
+                            deleteAlert = true
                         } label: {
                             HStack {
                                 Image(systemName: "delete.left")
